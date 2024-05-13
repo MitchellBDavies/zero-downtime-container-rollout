@@ -36,4 +36,4 @@ To clean up the pods that are running, you can run the cleanup script. This will
 - A full rollout deployment (Likely a pipeline that will phase out the remaining old servers for new ones).
 - A rollback system in case the new server is producing higher than expected bugs.
     - Possibly automated watching for server responses, but that's likely beyond the skope of this project.
-- More sofisticated deployment scripts. Currently deployments and configs are hardcoded, but a more dynamic system would be desired.
+- More sophisticated deployment scripts. Currently deployments and configs are hardcoded, but a more dynamic system would be desired.
