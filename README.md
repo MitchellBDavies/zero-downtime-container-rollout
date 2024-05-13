@@ -1,5 +1,5 @@
 # Zero Downtime Container Rollout #
-Just a small project to test out a custom zero downtime system using nginx, & podman. Note that this doens't currently work with Docker, but could probably be easily modifed to work with Docker. 
+Just a small project to test out a custom zero downtime system using nginx, & podman. Note that this doesn't work with Docker, but could probably be easily modifed to work with Docker. 
 
 # Instructions to run locally #
 If you have a desire to run this project, do so at your own risk. It was designed to run on my personal PC, and no one elses. 
