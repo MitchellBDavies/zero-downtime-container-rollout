@@ -5,15 +5,19 @@ Just a small project to test out a custom zero downtime system using nginx, & po
 If you have a desire to run this project, do so at your own risk. It was designed to run on my personal PC, and no one elses. 
 
 Build the images using the setup script. This will create 4 images, 1 for nginx, 1 for a client, and 2 servers that represent an old version and target deployment.
+
 `./setup.sh`
 
 Run the start script to spin up 4 servers that send simple responses to a client behind the nginx server.
+
 `./start_servers.sh`
 
 To start making requests (And watch them as they happen), run the client in a seperate shell.
+
 `podman run --rm --net load_balanced_net --name client client`
 
 To start a new deployment, you can start by running the canary script. The intention of this script is to add a 5th server that is running the newest version, so that it can be monitored in production on a small portion of traffic. The script will spin up the 5th server and then modify the nginx server to recognize this new server.
+
 `./canary.sh`
 
 While there are both servers running, you'll be able to see the client hitting both versions of code:
@@ -23,6 +27,7 @@ While there are both servers running, you'll be able to see the client hitting b
 ```
 
 To clean up the pods that are running, you can run the cleanup script. This will kill the named pods in this project and delete it's network. Be careful if you have pods or networks that are named similarily, as they may get deleted.
+
 `./cleanup.sh`
 
 # Future Development #
