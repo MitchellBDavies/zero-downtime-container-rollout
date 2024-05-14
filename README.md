@@ -26,6 +26,10 @@ While there are both servers running, you'll be able to see the client hitting b
 {'status_code': 200, 'body': '{"message":"Hello World","version":"2.0.0"}'}
 ```
 
+To do a complete rollout, upgrading the 4 servers to hit the newest version, run the rollout script. This will remove a server from the loadbalancer, recreate the pod with the newest version, and readd it to the loadbalancer. This then repeats for all 4 servers, and then drops the canary server. 
+
+`./rollout.sh`
+
 To clean up the pods that are running, you can run the cleanup script. This will kill the named pods in this project and delete it's network. Be careful if you have pods or networks that are named similarily, as they may get deleted.
 
 `./cleanup.sh`
@@ -33,7 +37,7 @@ To clean up the pods that are running, you can run the cleanup script. This will
 # Future Development #
 - Not quite Zero Downtime yet (Small period when the nginx server is restarting).
 - A 50/50 deployment (Or at least more staging beyond the canary deployment).
-- A full rollout deployment (Likely a pipeline that will phase out the remaining old servers for new ones).
+- Health checks prior to connecting a server to the loadbalancer.
 - A rollback system in case the new server is producing higher than expected bugs.
     - Possibly automated watching for server responses, but that's likely beyond the skope of this project.
 - More sophisticated deployment scripts. Currently deployments and configs are hardcoded, but a more dynamic system would be desired.
