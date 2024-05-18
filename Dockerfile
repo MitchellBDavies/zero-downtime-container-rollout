@@ -5,7 +5,9 @@ COPY ./server/Pipfile /usr/server/src/fastapi/
 RUN python -m pip install pipenv \
    && pipenv install
 EXPOSE 8000
-CMD ["pipenv", "run", "fastapi", "run", "server/src/main.py", "--proxy-headers",  "--host", "0.0.0.0", "--port", "8000"]
+HEALTHCHECK --interval=5s --timeout=5s --start-period=5s \
+   CMD curl localhost:8000/health
+CMD pipenv run fastapi run server/src/main.py --proxy-headers --host 0.0.0.0 --port 8000
 
 FROM python:3.9 as client
 WORKDIR /usr/client/
