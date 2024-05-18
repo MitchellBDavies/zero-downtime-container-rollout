@@ -37,7 +37,6 @@ To clean up the pods that are running, you can run the cleanup script. This will
 # Future Development #
 - Not quite Zero Downtime yet (Small period when the nginx server is restarting).
 - A 50/50 deployment (Or at least more staging beyond the canary deployment).
-- Health checks prior to connecting a server to the loadbalancer.
 - A rollback system in case the new server is producing higher than expected bugs.
     - Possibly automated watching for server responses, but that's likely beyond the skope of this project.
 - More sophisticated deployment scripts. Currently deployments and configs are hardcoded, but a more dynamic system would be desired.
