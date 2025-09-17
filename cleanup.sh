@@ -1,8 +1,13 @@
-podman kill client
-podman kill server_1
-podman kill server_2
-podman kill server_3
-podman kill server_4
-podman kill canary
-podman kill load_balancer
-podman network rm load_balanced_net
+docker kill client
+docker kill server_1
+docker kill server_2
+docker kill server_3
+docker kill server_4
+docker kill canary
+docker kill load_balancer
+docker kill consul_server
+docker kill consul_registration_agent
+docker network rm load_balanced_net
+
+rm consulregistermount/*
+rm nginxmount/*
