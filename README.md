@@ -1,5 +1,5 @@
 # Zero Downtime Container Rollout #
-Just a small project to test out a custom zero downtime system using nginx, & podman. Note that this doesn't work with Docker, but could probably be easily modifed to work with Docker. 
+Just a small project to test out a custom zero downtime system using nginx, consul, & Docker. Consul is used to register new servers as they come online with the load balancer, and remove old ones when they come offline. 
 
 # Instructions to run locally #
 If you have a desire to run this project, do so at your own risk. It was designed to run on my personal PC, and no one elses. 
@@ -14,7 +14,7 @@ Run the start script to spin up 4 servers that send simple responses to a client
 
 To start making requests (And watch them as they happen), run the client in a seperate shell.
 
-`podman run --rm --net load_balanced_net --name client client`
+`docker run --rm --net load_balanced_net --name client client`
 
 To start a new deployment, you can start by running the canary script. The intention of this script is to add a 5th server that is running the newest version, so that it can be monitored in production on a small portion of traffic. The script will spin up the 5th server and then modify the nginx server to recognize this new server.
 
@@ -26,7 +26,7 @@ While there are both servers running, you'll be able to see the client hitting b
 {'status_code': 200, 'body': '{"message":"Hello World","version":"2.0.0"}'}
 ```
 
-To do a complete rollout, upgrading the 4 servers to hit the newest version, run the rollout script. This will remove a server from the loadbalancer, recreate the pod with the newest version, and readd it to the loadbalancer. This then repeats for all 4 servers, and then drops the canary server. 
+To do a complete rollout, upgrading the 4 servers to hit the newest version, run the rollout script. This will remove a server from the loadbalancer, recreate the pod with the newest version, register with consul, and readd it to the loadbalancer. This then repeats for all 4 servers, and then drops the canary server. 
 
 `./rollout.sh`
 
